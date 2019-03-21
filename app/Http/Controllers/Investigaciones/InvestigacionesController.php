@@ -7,7 +7,7 @@ use App\Exceptions\ModelNotUpdateException;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Helpers\Helper;
 use App\Http\Resources\investigaciones\InvestigacionesResource;
-use App\Investigaciones;
+use App\Investigacion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -16,15 +16,15 @@ class InvestigacionesController extends ApiController
     /**
      * Display a listing of the resource.
      * @param Request $request
-     * @param Investigaciones $investigaciones
+     * @param Investigacion $investigaciones
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Investigaciones $investigaciones)
+    public function index(Request $request, Investigacion $investigaciones)
     {
         $records = $investigaciones->all();
 
         if ($records->count() == 0) {
-            Helper::throwModelNotFoud(Investigaciones::class);
+            Helper::throwModelNotFoud(Investigacion::class);
         }
         $data = InvestigacionesResource::collection($records);
         return $this->showAll($data);
@@ -40,20 +40,20 @@ class InvestigacionesController extends ApiController
      */
     public function store(Request $request, $id)
     {
+        /** @var $centroCosto CentroCosto*/
         $centroCosto = CentroCosto::find($id);
-        $value = $this->transformRequest($request);
-        $record = $centroCosto->investigaciones()->create($value);
-        $data = new InvestigacionesResource($record);
-        return $this->showOne($data);
+        $values = $this->transformRequest($request);
+        $centroCosto->investigaciones()->createMany($values);
+        return $this->showMessage('Investigaciones creadas exitosamente', 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Investigaciones  $investigaciones
+     * @param  \App\Investigacion  $investigaciones
      * @return \Illuminate\Http\Response
      */
-    public function show(Investigaciones $investigaciones)
+    public function show(Investigacion $investigaciones)
     {
         $data = new InvestigacionesResource($investigaciones);
         return $this->showOne($data);
@@ -85,7 +85,7 @@ class InvestigacionesController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Investigaciones  $investigaciones
+     * @param  \App\Investigacion  $investigaciones
      * @return \Illuminate\Http\Response
      * @throws
      */
@@ -105,20 +105,20 @@ class InvestigacionesController extends ApiController
      * @return array
      */
     public function transformRequest(Request $request) {
+        $req = $request->all();
+        $data = [];
         $rules = [
             'ciudad' => 'required',
             'descripcion' => 'required',
         ];
 
-        $this->validate($request, $rules);
-
-        $data = [
-            'ciudad' => $request->get('ciudad'),
-            'descripcion' => $request->get('descripcion')
-        ];
-
-        if ($request->has('anexo')) {
-            $data['anexo'] = $request->get('anexo');
+        foreach ($req as $value) {
+            Helper::validator($value, $rules);
+            $data[] = [
+                'ciudad'        => $value['ciudad'],
+                'anexo'         => $value['anexo'] ? $value['anexo'] : null,
+                'descripcion'   => $value['descripcion'],
+            ];
         }
 
         return $data;

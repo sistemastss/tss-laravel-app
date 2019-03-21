@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ServicioEsp extends Model
+class ServicioEsp extends Servicio
 {
     //
     /**
@@ -17,7 +17,7 @@ class ServicioEsp extends Model
      * @var array
      */
     protected $fillable = [
-        'centro_costo_id',
+        'servicio_id',
         'descripcion',
         'ciudad_desarrollo',
         'nombre',
@@ -25,10 +25,10 @@ class ServicioEsp extends Model
         'departamento',
         'ciudad',
         'telefono',
-        'email',
-        'observaciones',
+        'correo',
+        'descripcion',
         'anexo',
-        'estado',
+        'estado'
     ];
 
 
@@ -37,10 +37,9 @@ class ServicioEsp extends Model
         return $query->where('active', $value);
     }
 
-
-    public function centroCosto()
+    public function servicio()
     {
-        return $this->belongsTo(CentroCosto::class, 'centro_costo_id');
+        return $this->belongsTo(Servicio::class);
     }
 
 

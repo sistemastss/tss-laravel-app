@@ -4,23 +4,24 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCentroCostosTable extends Migration
+class CreateFacturacionesTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-
     public function up()
     {
-        Schema::create('centro_costo', function (Blueprint $table) {
+        Schema::create('facturaciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('usuario_id');
-            $table->string('solicitante');
-            $table->bigInteger('telefono');
+            $table->string('centro_costo_id');
+            $table->string('destinatario');
+            $table->string('tipo_sociedad');
+            $table->string('tipo_identificacion');
+            $table->string('identificacion');
+            $table->string('telefono');
             $table->string('email');
-            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateCentroCostosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('centro_costo');
+        Schema::dropIfExists('facturaciones');
     }
 }

@@ -10,9 +10,8 @@ $factory->define(App\ServicioEsp::class, function (Faker $faker) {
         'departamento' => $faker->word,
         'ciudad' => $faker->city,
         'telefono' => $faker->randomNumber(),
-        'email' => $faker->email,
-        'observaciones' => $faker->text,
+        'correo' => $faker->email,
+        'descripcion' => $faker->text,
         'anexo' => $faker->text,
-        'estado' => 'cargado',
     ];
 });

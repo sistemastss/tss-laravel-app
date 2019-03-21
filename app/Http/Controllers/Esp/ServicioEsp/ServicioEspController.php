@@ -37,27 +37,14 @@ class ServicioEspController extends ApiController
      */
     public function store(Request $request, CentroCosto $centroCosto)
     {
-        /**$codigos = [
-            'historialJudicial'       => 'HJ',
-            'visitaDomiciliaria'      => 'VDS',
-            'verificacionLaboral'     => 'VL',
-            'dueDilligence'           => 'DDL',
-            'estudioFinanciero'       => 'EF',
-            'verificacionAcademica'   => 'VA',
-            'poligrafia'              => 'PL',
-            'dicatamenGrafolofico'    => 'DG',
-            'decadactilar'            => 'Dd',
-            'pruebaPsicotecnica'      => 'PP',
-        ];*/
-
         $value = $this->transformResponse($request);
-        $centroCosto->serviciosEsp()->createMany($value);
-        /** @var ServicioEsp $record */
-        $record = ServicioEsp::create($value);
-        $record->actividadAplicada()->createMany($value['actividades']);
-        $record->refresh();
-        $data = new ServicioEspResource($record);
-        return $this->showOne($data);
+
+        foreach ($value as $item) {
+            /** @var ServicioEsp $record */
+            $record = $centroCosto->serviciosEsp()->create($item);
+            $record->actividadAplicada()->createMany($item['actividades']);
+        }
+        return $this->showMessage('Esp guardados exitosamente', 201);
     }
 
     /**
@@ -110,33 +97,35 @@ class ServicioEspController extends ApiController
      * @throws \Illuminate\Validation\ValidationException
      */
     private function transformResponse(Request $request) {
+        $data = $request->all();
+        $esp = [];
 
         $rules = [
-            // 'centroCostoId'         => 'required|numeric',
             'ciudadDesarrollo'      => 'required|string',
-            'nombre'                => 'required|string', //$key['nombre'],
-            'documento'             => 'required|numeric', //$key['documento'],
-            'departamento'          => 'required|string', //$key['departamento'],
-            'ciudad'                => 'required|string', //$key['ciudad'],
-            'telefono'              => 'required|numeric', //$key['telefono'],
-            'email'                 => 'required|email', //$key['correo'],
-            'observaciones'         => 'required|string', //$key['observaciones'] || '',
+            'nombre'                => 'required|string',
+            'documento'             => 'required|numeric',
+            'departamento'          => 'required|string',
+            'ciudad'                => 'required|string',
+            'telefono'              => 'required|numeric',
+            'correo'                => 'required|email',
+            'descripcion'           => 'required|string',
             'actividades'           => 'required'
         ];
 
-        $data = $request->all();
+        // validations
         foreach ($data as $value) {
             Helper::validator($value, $rules);
         }
 
-        $esp = [];
+        // transform data
         foreach ($data as $value) {
             $actividades = $value['actividades'];
             $filtro = [];
-            foreach ($actividades as $actividad) {
-                if (current($actividad)) {
-                    $filtro[] = ['actividad_codigo' =>  key($actividad)];
+            foreach ($actividades as $key => $val) {
+                if ($val) {
+                    $filtro[] = ['actividad_codigo' =>  $key];
                 }
+
             }
 
             $esp[] =  [
@@ -146,33 +135,12 @@ class ServicioEspController extends ApiController
                 'departamento'          => $value['departamento'],
                 'ciudad'                => $value['ciudad'],
                 'telefono'              => $value['telefono'],
-                'email'                 => $value['email'],
-                'observaciones'         => $value['observaciones'],
-                'anexo'                 => $value['anexo'],
+                'correo'                => $value['correo'],
+                'descripcion'           => $value['descripcion'],
+                'anexo'                 => $value['anexo'] ? $value['anexo'] : null,
                 'actividades'           => $filtro
             ];
         }
-
-        /**$actividades = array_map(
-            function ($value) {return ['actividad_codigo' => $value['actividadCodigo']];},
-            $request->get('actividades')
-        );*/
-
-        /*$array =  [
-            'centro_costo_id'       => $request->get('centroCostoId'),
-            'ciudad_desarrollo'     => $request->get('ciudadDesarrollo'),
-            'nombre'                => $request->get('nombre'),
-            'documento'             => $request->get('documento'),
-            'departamento'          => $request->get('departamento'),
-            'ciudad'                => $request->get('ciudad'),
-            'telefono'              => $request->get('telefono'),
-            'email'                 => $request->get('email'),
-            'observaciones'         => $request->get('observaciones'),
-            'anexo'                 => $request->get('anexo'),
-            'estado'                => Arr::exists($request->all(), 'estado') ? $request->get('estado') : null,
-            'actividades'           => $actividades
-        ];*/
-
         return $esp;
     }
 }

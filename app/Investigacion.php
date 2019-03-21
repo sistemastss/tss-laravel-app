@@ -4,19 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Investigaciones extends Model
+class Investigacion extends Model
 {
     protected $table = 'investigaciones';
 
     protected $fillable = [
-        'centro_costo_id',
+        'servicio_id',
         'ciudad',
         'descripcion',
         'anexo'
     ];
 
-    public function centroCosto()
+    public function servicio()
     {
-        return $this->belongsTo(CentroCosto::class, 'centro_costo_id');
+        return $this->belongsTo(Servicio::class);
     }
 }

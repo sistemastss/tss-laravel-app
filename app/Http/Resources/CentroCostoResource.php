@@ -18,8 +18,9 @@ class CentroCostoResource extends JsonResource
             'id'                => $this->id,
             'ordenCompra'       => $this->when($this->ordenCompra, new OrdenCompraResource($this->ordenCompra)),
             'solicitante'       => $this->solicitante,
-            'direccion'         => $this->usuario->direccion,
-            'mail'              => $this->usuario->mail
+            'email'             => $this->email,
+            'telefono'          => $this->telefono,
+            'direccion'         => $this->direccion,
         ];
     }
 }

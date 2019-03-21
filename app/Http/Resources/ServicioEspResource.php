@@ -15,8 +15,12 @@ class ServicioEspResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'                => $this->id,
-            'centroCosto'       => new CentroCostoResource($this->centroCosto),
+            'id'                => $this->servicio->id,
+            'centroCosto'       => new CentroCostoResource($this->servicio->centroCosto),
+            'adjunto'           => $this->servicio->adjunto,
+            'clase'             => $this->servicio->clase,
+            'anexo'             => $this->servicio->anexo,
+            'estado'            => $this->servicio->estado,
             'ciudadDesarrollo'  => $this->ciudad_desarrollo,
             'nombre'            => $this->nombre,
             'documento'         => $this->documento,
@@ -25,8 +29,6 @@ class ServicioEspResource extends JsonResource
             'telefono'          => $this->telefono,
             'email'             => $this->email,
             'observaciones'     => $this->observaciones,
-            'anexo'             => $this->anexo,
-            'estado'            => $this->estado,
             'timestamps' => [
                 'fechaCreacion'         => $this->created_at->format('Y-m-d H:i'),
                 'fechaActualizacion'    => $this->updated_at->format('Y-m-d H:i')

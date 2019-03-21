@@ -36,6 +36,8 @@ Route::apiResource('actividad-aplicada', 'ActividadesController', ['only' => ['s
 Route::apiResource('actividad-aplicada.actividad-asignada', 'Actividad\ActividadAsignadaController');
 
 
+Route::apiResource('servicios', 'ServiciosController', ['only', ['index']]);
+
 
 /*
 |--------------------------------------------------------------------------

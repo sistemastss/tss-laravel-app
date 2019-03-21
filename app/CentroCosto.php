@@ -7,36 +7,40 @@ use Illuminate\Database\Eloquent\Model;
 
 class CentroCosto extends Model
 {
-    protected $table = 'centro_costos';
+    protected $table = 'centro_costo';
 
     protected $fillable = [
         'usuario_id',
         'solicitante',
-        'correo_solicitante',
+        'email_solicitante',
+        'telefono',
         'active'
     ];
 
-    public function usuario() {
+    public function usuario()
+    {
         return $this->belongsTo(Usuario::class, 'usuario_id');
     }
 
-    public function cliente() {
+    public function cliente()
+    {
         return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
-
-    function ordenCompra() {
+    function ordenCompra()
+    {
         return $this->hasOne(OrdenCompra::class, 'centro_costo_id');
     }
 
-    public function serviciosEsp()
+    function facturacion()
     {
-        return $this->hasMany(ServicioEsp::class, 'centro_costo_id');
+        return $this->hasOne(Facturacion::class, 'centro_costo_id');
+
     }
 
-    public function investigaciones()
+    public function servicio()
     {
-        return $this->hasMany(Investigaciones::class, 'centro_costo_id');
+        return $this->hasOne(Servicio::class, 'centro_costo_id');
     }
 
 }

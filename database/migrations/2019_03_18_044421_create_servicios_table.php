@@ -4,18 +4,31 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvestigacionesTable extends Migration
+class CreateServiciosTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+
+/*[
+'centro_costo_id',
+'ciudad',
+'anexo',
+'descripcion',
+'clase',
+'estado',
+]*/
     public function up()
     {
-        Schema::create('investigaciones', function (Blueprint $table) {
+        Schema::create('servicios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('servicio_id');
+            $table->integer('centro_costo_id');
+            $table->string('anexo');
+            $table->text('descripcion');
+            $table->text('clase');
+            $table->text('estado');
             $table->timestamps();
         });
     }
@@ -27,6 +40,6 @@ class CreateInvestigacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('investigaciones');
+        Schema::dropIfExists('servicios');
     }
 }

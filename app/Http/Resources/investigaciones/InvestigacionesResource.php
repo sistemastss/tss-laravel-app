@@ -16,11 +16,11 @@ class InvestigacionesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'                => $this->id,
-            'centroCosto'       => new CentroCostoResource($this->centroCosto),
-            'ciudad'            => $this->ciudad,
-            'descripcion'       => $this->descripcion,
-            'anexo'             => $this->anexo,
+            'id'                => $this->servicio->id,
+            'centroCosto'       => new CentroCostoResource($this->servicio->centroCosto),
+            'clase'             => $this->servicio->clase,
+            'anexo'             => $this->servicio->anexo,
+            'estado'            => $this->servicio->estado,
             'timestamps' => [
                 'fechaCreacion'         => $this->created_at->format('Y-m-d H:i'),
                 'fechaActualizacion'    => $this->updated_at->format('Y-m-d H:i')

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
 
         // todo centro de costo factory
-        $cantidad = 1; // controla la cantidad de centros de costo a crear
+        $cantidad = 2; // controla la cantidad de centros de costo a crear
 
         factory(\App\CentroCosto::class, $cantidad)->create()->each(
             function (\App\CentroCosto $centroCosto) {
@@ -38,7 +38,24 @@ class DatabaseSeeder extends Seeder
                 * un centro de costo tinene n cantidad de servicios esp
                  *en este caso 2
                 */
-                $centroCosto->serviciosEsp()->saveMany(factory(\App\ServicioEsp::class, 2)->make());
+                $centroCosto->servicio()->saveMany(factory(\App\Servicio::class, 2)->create()->each(
+                    function (\App\Servicio $servicio) {
+                        $servicio->servicioEsp()->save(factory(\App\ServicioEsp::class)->make());
+                    }
+                ));
+            });
+
+        factory(\App\CentroCosto::class, $cantidad)->create()->each(
+            function (\App\CentroCosto $centroCosto) {
+                /*
+                * un centro de costo tinene n cantidad de servicios esp
+                 *en este caso 2
+                */
+                $centroCosto->servicio()->saveMany(factory(\App\Servicio::class, 2)->create()->each(
+                    function (\App\Servicio $servicio) {
+                        $servicio->investigacion()->save(factory(\App\Investigacion::class)->make());
+                    }
+                ));
             });
 
         // persona evaluada

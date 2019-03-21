@@ -15,17 +15,18 @@ class CreateServiciosEspTable extends Migration
     {
         Schema::create('servicios_esp', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer("centro_costo_id");
+            $table->integer("servicio_id");
             $table->string("ciudad_desarrollo");
             $table->string("nombre");
             $table->bigInteger("documento");
             $table->string("departamento");
             $table->string("ciudad");
             $table->bigInteger("telefono");
-            $table->string("email");
-            $table->text("observaciones");
+            $table->string("correo");
+            $table->text("descripcion");
             $table->string("anexo")->nullable();
-            $table->string("estado")->default("cargado");
+            $table->string("estado")->default("proceso");
+            $table->string("clase")->default("esp");
             $table->boolean("active")->default(true);
             $table->timestamps();
         });
