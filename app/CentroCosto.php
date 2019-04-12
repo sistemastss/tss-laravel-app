@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\OrdenCompra;
 use Illuminate\Database\Eloquent\Model;
 
 class CentroCosto extends Model
@@ -12,35 +11,44 @@ class CentroCosto extends Model
     protected $fillable = [
         'usuario_id',
         'solicitante',
+        'telefono_solicitante',
         'email_solicitante',
-        'telefono',
-        'active'
+        'destino_factura',
+        'tipo_sociedad',
+        'tipo_identificacion',
+        'numero_identificacion',
+        'telefono_factura',
+        'email_factura',
     ];
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id');
+        return $this->belongsTo(Usuario::class);
     }
 
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class, 'cliente_id');
+        return $this->belongsTo(Cliente::class);
     }
 
     function ordenCompra()
     {
-        return $this->hasOne(OrdenCompra::class, 'centro_costo_id');
+        return $this->hasOne(OrdenCompra::class);
     }
 
-    function facturacion()
+    public function servicioEsp()
     {
-        return $this->hasOne(Facturacion::class, 'centro_costo_id');
-
+        return $this->hasMany(ServicioEsp::class);
     }
 
-    public function servicio()
+    public function investigacion()
     {
-        return $this->hasOne(Servicio::class, 'centro_costo_id');
+        return $this->hasMany(Investigacion::class);
+    }
+
+    public function poligrafia()
+    {
+        return $this->hasMany(Poligrafia::class);
     }
 
 }

@@ -9,14 +9,14 @@ class Investigacion extends Model
     protected $table = 'investigaciones';
 
     protected $fillable = [
-        'servicio_id',
+        'centro_costo_id',
         'ciudad',
+        'anexo',
         'descripcion',
-        'anexo'
     ];
 
-    public function servicio()
+    public function centroCosto()
     {
-        return $this->belongsTo(Servicio::class);
+        return $this->belongsTo(CentroCosto::class);
     }
 }

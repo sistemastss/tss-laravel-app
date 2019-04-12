@@ -10,19 +10,30 @@ class ActividadAplicada extends Model
 
     protected $fillable = [
         'actividad_codigo',
-        'servicio_esp_id',
-        'estado',
     ];
 
-    public function servicioEsp() {
-        return $this->belongsTo(ServicioEsp::class, 'servicio_esp_id');
+    public function actividad()
+    {
+        return $this->morphTo();
     }
 
-    public function actividadDisponible() {
+    public function actividadDisponible()
+    {
         return $this->belongsTo(ActividadDisponible::class, 'actividad_codigo', 'codigo');
     }
 
-    public function actividadAsignada() {
+    public function actividadAsignada()
+    {
         return $this->hasOne(ActividadAsignada::class, 'actividad_apl_id');
+    }
+
+    public function servicioEsp()
+    {
+        return $this->belongsTo(ServicioEsp::class, 'servicio_id');
+    }
+
+    public function investigacion()
+    {
+        return $this->belongsTo(Investigacion::class, 'servicio_id');
     }
 }

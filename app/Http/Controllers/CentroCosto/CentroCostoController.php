@@ -17,14 +17,34 @@ class CentroCostoController extends ApiController
      * @return \Illuminate\Http\Response
      * @throws
      */
-    public function store(Request $request)
+    public function store(Request $request, CentroCosto $centroCosto)
     {
         $value = $this->transformResponse($request);
+
         /** @var CentroCosto $record */
         $record = CentroCosto::create($value);
 
         if (Arr::exists($value, 'orden_compra')) {
-           $record->ordenCompra()->create($value['orden_compra']);
+            $time = time();
+            $ordenCompra = $value['orden_compra'];
+            $anexo = $ordenCompra['anexo'];
+            [$name, $blob] = $anexo;
+            $fileName = "{$name}_{$time}.doc";
+
+            $file = [
+                'content' => Helper::fileFromBlob($blob),
+                'path' => 'public/files/',
+                'name' => $fileName
+            ];
+
+            Helper::saveFileUploaded($file);
+
+            $ordenCompra = [
+                'numero_orden_compra' => $value['orden_compra'],
+                'anexo' => $fileName
+            ];
+
+            $record->ordenCompra()->create($ordenCompra);
         }
 
         $data = new CentroCostoResource($record);
@@ -85,15 +105,35 @@ class CentroCostoController extends ApiController
      */
     private function transformResponse(Request $request) {
         $rules = [
-            'clienteId'         => 'required',
-            'solicitante'       => 'required',
-            'correoSolicitante' => 'required',
+            'clienteId'             => 'required|integer',
+            'solicitante'           => 'required|string',
+            'telefonoSolicitante'   => 'required|integer',
+            'emailSolicitante'      => 'required|string',
+            'destinoFactura'        => 'required|string',
+            'tipoSociedad'          => 'required|string',
+            'tipoIdentificacion'    => 'required|string',
+            'numeroIdentificacion'  => 'required|integer',
+            'telefonoFactura'       => 'required|integer',
+            'emailFactura'          => 'required|string',
         ];
 
-       Helper::validator($request->all(), $rules);
+        Helper::validator($request->all(), $rules);
+
+        $data = [
+            'usuario_id'            => $request->get('clienteId'),
+            'solicitante'           => $request->get('solicitante'),
+            'telefono_solicitante'  => $request->get('telefonoSolicitante'),
+            'email_solicitante'     => $request->get('emailSolicitante'),
+            'destino_factura'       => $request->get('destinoFactura'),
+            'tipo_sociedad'         => $request->get('tipoSociedad'),
+            'tipo_identificacion'   => $request->get('tipoIdentificacion'),
+            'numero_identificacion' => $request->get('numeroIdentificacion'),
+            'telefono_factura'      => $request->get('telefonoFactura'),
+            'email_factura'         => $request->get('emailFactura'),
+        ];
 
         if ($request->has('numeroOrden') && $request->has('anexo')) {
-            $array = [
+            $values = [
                 'numeroOrden'   => $request->get('numeroOrden'),
                 'anexo'         => $request->get('anexo'),
             ];
@@ -103,24 +143,13 @@ class CentroCostoController extends ApiController
                 'anexo'       => 'required',
             ];
 
-            Helper::validator($array, $rules);
+            Helper::validator($values, $rules);
 
-            return [
-                'usuario_id'            => $request->get('clienteId'),
-                'solicitante'           => $request->get('solicitante'),
-                'correo_solicitante'      => $request->get('correoSolicitante'),
-                'orden_compra'          => [
-                    'numero_orden_compra'   => $request->get('numeroOrden'),
-                    'anexo'                 => $request->get('anexo'),
-                ]
+            $data['orden_compra'] = [
+                'numero_orden_compra'   => $request->get('numeroOrden'),
+                'anexo'                 => $request->get('anexo'),
             ];
-
         }
-
-        return [
-            'usuario_id'            => $request->get('clienteId'),
-            'solicitante'           => $request->get('solicitante'),
-            'correo_solicitante'      => $request->get('correoSolicitante'),
-        ];
+        return $data;
     }
 }

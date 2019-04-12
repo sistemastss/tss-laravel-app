@@ -15,10 +15,19 @@ class CreatePoligrafiaTable extends Migration
     {
         Schema::create('poligrafia', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer("persona_evaluada_id");
-            $table->string("tipo_prueba");
-            $table->string("cargo_aplica");
-            $table->string("adjunto");
+            $table->integer("centro_costo_id");
+            $table->string("evaluado");
+            $table->bigInteger("documento");
+            $table->string('tipo_documento');
+            $table->string("departamento");
+            $table->string('ciudad');
+            $table->bigInteger("telefono");
+            $table->string("email");
+            $table->text("contexto");
+            $table->string("tipo_poligrafia");
+            $table->string('anexo')->nullable();
+            $table->string('tipo_servicio')->default('pol');
+            $table->string('estado')->default("proceso");
             $table->timestamps();
         });
     }

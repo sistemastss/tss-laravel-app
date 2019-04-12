@@ -8,11 +8,9 @@ class Servicio extends Model
 {
     protected $fillable = [
         'centro_costo_id',
-        'ciudad',
+        'ciudad_desarrollo',
         'anexo',
-        'descripcion',
-        'clase',
-        'estado',
+        'tipo_servicio',
     ];
 
     public function centroCosto()
@@ -20,14 +18,6 @@ class Servicio extends Model
         return $this->belongsTo(CentroCosto::class);
     }
 
-    public function servicioEsp()
-    {
-        return $this->hasMany(ServicioEsp::class);
-    }
 
-    public function investigacion()
-    {
-        return $this->hasMany(Investigacion::class);
-    }
 
 }

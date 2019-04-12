@@ -15,9 +15,9 @@ class CreateActividadesAplicadasTable extends Migration
     {
         Schema::create('actividades_aplicadas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("actividad_codigo");
-            $table->integer("servicio_esp_id");
-            $table->string('estado')->default("cargado");
+            $table->string('actividad_codigo');
+            $table->morphs('actividad');
+            $table->string('estado')->default('proceso');
             $table->timestamps();
         });
     }

@@ -15,20 +15,14 @@ class ActividadAplicadaResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'                => $this->resource->id,
+            'id'                => $this->id,
             'estado'            => $this->estado,
-            'codigo'            => $this->actividadDisponible->codigo,
+            'codigo'            => $this->actividad_codigo,
             'nombre'            => $this->actividadDisponible->nombre,
             'tiempos'           => $this->actividadDisponible->tiempos,
             'actividadAsignada' => $this->when($this->actividadAsignada, new ActividadAsignadaResource($this->actividadAsignada)),
-            'timestamps' => [
-                'fechaCreacion'         => $this->created_at->format('Y-m-d H:i'),
-                'fechaActualizacion'    => $this->updated_at->format('Y-m-d H:i')
-            ],
-            'links' => [
-                'self'          => route('actividad-aplicada.show', $this->id),
-                'servicioEsp'   => route('servicio-esp.show', $this->servicio_esp_id)
-            ]
+            'fechaCreacion'         => $this->created_at->format('Y-m-d H:i'),
+            'fechaActualizacion'    => $this->updated_at->format('Y-m-d H:i')
         ];
     }
 }

@@ -21,10 +21,12 @@ class ActividadAplicadaController extends ApiController
      */
     public function index(ServicioEsp $servicioEsp)
     {
-        $records = $servicioEsp->actividadAplicada()->get();
+        $records = $servicioEsp->actividades()->get();
+
         if ($records->count() == 0) {
             Helper::throwModelNotFoud(ActividadAplicada::class);
         }
+        
         $data = ActividadAplicadaResource::collection($records);
         return $this->showAll($data);
     }

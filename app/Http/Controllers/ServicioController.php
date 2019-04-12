@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ServicioEspResource;
 use App\Http\Resources\ServicioResource;
 use App\Investigacion;
 use App\ServicioEsp;
@@ -17,16 +18,8 @@ class ServicioController extends ApiController
      */
     public function index(ServicioEsp $servicioEsp, Investigacion $investigaciones)
     {
-        $esp = $servicioEsp->all();
-        $inv = $investigaciones->all();
-
-        $espCollect = ServicioResource::collection($esp);
-        $invCollect = ServicioResource::collection($inv);
-
-        $data1 = collect($espCollect);
-        $data2 = collect($invCollect);
-
-        $values = $data1->merge($data2);
+        $servicios = Servicio::all();
+        $values = ServicioResource::collection($servicios);
         return $this->showAll($values);
     }
 

@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use \App\ServicioEsp;
+use \App\Investigacion;
+use \App\Poligrafia;
+use \App\CentroCosto;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesSeeder::class);
         $this->call(Usuarios::class);
         $this->call(ActividadDisponibleSeeder::class);
-        $this->call(ActividadAplicadaSeeder::class);
+        // $this->call(ActividadAplicadaSeeder::class);
         // $this->call(ActividadAsignadaSeeder::class);
 
 
@@ -32,34 +36,27 @@ class DatabaseSeeder extends Seeder
         // todo centro de costo factory
         $cantidad = 2; // controla la cantidad de centros de costo a crear
 
-        factory(\App\CentroCosto::class, $cantidad)->create()->each(
-            function (\App\CentroCosto $centroCosto) {
-                /*
-                * un centro de costo tinene n cantidad de servicios esp
-                 *en este caso 2
-                */
-                $centroCosto->servicio()->saveMany(factory(\App\Servicio::class, 2)->create()->each(
-                    function (\App\Servicio $servicio) {
-                        $servicio->servicioEsp()->save(factory(\App\ServicioEsp::class)->make());
-                    }
-                ));
-            });
+        factory(CentroCosto::class, $cantidad)->create()->each(
+            function (CentroCosto $centroCosto) {
+                $centroCosto->servicioEsp()->saveMany(factory(ServicioEsp::class, 2)->create());
+            }
+        );
 
-        factory(\App\CentroCosto::class, $cantidad)->create()->each(
-            function (\App\CentroCosto $centroCosto) {
-                /*
-                * un centro de costo tinene n cantidad de servicios esp
-                 *en este caso 2
-                */
-                $centroCosto->servicio()->saveMany(factory(\App\Servicio::class, 2)->create()->each(
-                    function (\App\Servicio $servicio) {
-                        $servicio->investigacion()->save(factory(\App\Investigacion::class)->make());
-                    }
-                ));
-            });
+        factory(CentroCosto::class, $cantidad)->create()->each(
+            function (CentroCosto $centroCosto) {
+                $centroCosto->investigacion()->saveMany(factory(Investigacion::class, 2)->create());
+            }
+        );
+
+        factory(CentroCosto::class, $cantidad)->create()->each(
+            function (CentroCosto $centroCosto) {
+                $centroCosto->poligrafia()->saveMany(factory(Poligrafia::class, 2)->create());
+            }
+        );
+
 
         // persona evaluada
-        factory(\App\PersonaEvaluada::class, $cantidad * 2)->create();
+        // factory(\App\PersonaEvaluada::class, $cantidad * 2)->create();
 
         //historial judicial
         //factory(\App\HistorialJudicial::class, $cantidad * 2)->create();

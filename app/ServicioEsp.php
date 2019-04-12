@@ -2,52 +2,59 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class ServicioEsp extends Servicio
 {
-    //
-    /**
-     * @var string
-     */
+    private const espBasico      = ['HJ', 'VA', 'VL', 'VDS'];
+    private const espIntegral    = ['HJ', 'VA', 'VL', 'VDS', 'PL'];
+    private const espAvanzado    = ['HJ', 'VA', 'VL', 'VDS', 'PL', 'EF'];
+    
     protected $table = 'servicios_esp';
 
-
-    /**
-     * @var array
-     */
     protected $fillable = [
-        'servicio_id',
-        'descripcion',
-        'ciudad_desarrollo',
-        'nombre',
+        'centro_costo_id',
+        'evaluado',
+        'tipo_documento',
         'documento',
-        'departamento',
-        'ciudad',
         'telefono',
-        'correo',
-        'descripcion',
-        'anexo',
-        'estado'
+        'email',
+        'ciudad',
+        'direccion',
+        'observaciones',
+        'tipo_esp',
+        'aceptar_terminos',
+        'anexo'
     ];
 
+    public static function getActividades(string $tipoEsp) {
+        switch ($tipoEsp) {
+            case 'basico':
+                return self::espBasico;
 
-    public function scopeActive($query, $value = true)
-    {
-        return $query->where('active', $value);
+            case 'integral':
+                return self::espIntegral;
+
+            case 'avanzado':
+                return self::espAvanzado;
+
+            default:
+                return [];
+        }
     }
 
-    public function servicio()
+    public function centroCosto()
     {
-        return $this->belongsTo(Servicio::class);
+        return $this->belongsTo(CentroCosto::class);
     }
 
+    public function actividades()
+    {
+        return $this->morphMany(ActividadAplicada::class, 'actividad');
+    }
 
     public function actividadAplicada()
     {
         return $this->hasMany(ActividadAplicada::class, 'servicio_esp_id');
     }
-
 
     public function personaEvaluada()
     {
@@ -197,11 +204,6 @@ class ServicioEsp extends Servicio
     {
         return $this->hasMany(ObligacionVigenteReal:: class, 'servicio_esp_id');
     }
-
-
-
-
-
 
     public function consolidado()
     {

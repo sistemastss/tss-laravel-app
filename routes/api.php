@@ -24,6 +24,8 @@ Route::apiResource('clientes', 'ClienteController', ['only' => ['index']]);
 Route::apiResource('centro-costo', 'CentroCostoController');
 Route::apiResource('centro-costo.servicio-esp', 'Esp\ServicioEsp\ServicioEspController', ['only' => ['store']]);
 Route::apiResource('servicio-esp', 'Esp\ServicioEsp\ServicioEspController', ['except' =>'delete']);
+Route::apiResource('centro-costo.servicio-esp-masivo', 'Esp\ServicioEsp\ServicioEspMasivoController', ['only' => ['store']]);
+// Route::apiResource('centro-costo.servicio-esp', 'Esp\ServicioEsp\ServicioEspController', ['only' => ['store']]);
 
 
 Route::apiResource('usuario.servicios-esp', 'Esp\ServicioEsp\ServicioEspClienteController', ['only' => ['index']]);
@@ -36,7 +38,7 @@ Route::apiResource('actividad-aplicada', 'ActividadesController', ['only' => ['s
 Route::apiResource('actividad-aplicada.actividad-asignada', 'Actividad\ActividadAsignadaController');
 
 
-Route::apiResource('servicios', 'ServiciosController', ['only', ['index']]);
+Route::apiResource('servicios', 'ServicioController', ['only', ['index']]);
 
 
 /*
@@ -215,9 +217,21 @@ Route::Post('upload-informe/{id}', 'InformePdfController@index');
  *
  * INVESTIGACIONES
  */
-Route::post('centro-costo/{id}/investigaciones', 'Investigaciones\InvestigacionesController@store');
+Route::apiResource('centro-costo.investigaciones', 'Investigaciones\InvestigacionesController', ['only', ['store']]);
+// Route::post('centro-costo/{id}/investigaciones', 'Investigaciones\InvestigacionesController@store');
 Route::apiResource('investigaciones', 'Investigaciones\InvestigacionesController', ['except', ['store']]);
 
 
 Route::get('investigaciones/{servicio}/actividades', 'Actividad\ActividadAplicadaController@index');
 Route::post('investigaciones/{servicio}/actividades', 'Actividad\ActividadAplicadaController@store');
+
+
+
+
+/*
+ *
+ * POLIGRAFIA
+ */
+Route::apiResource('centro-costo.poligrafia', 'PoligrafiaController', ['only', ['store']]);
+Route::apiResource('poligrafia', 'PoligrafiaController', ['only', ['index']]);
+

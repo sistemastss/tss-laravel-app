@@ -18,25 +18,25 @@ class ActividadAplicadaSeeder extends Seeder
 
             \App\ActividadAplicada::create([
                 'actividad_codigo' => 'HJ',
-                'servicio_esp_id' => $i,
+                'servicio_id' => $i,
                 'estado' => 'cargado'
             ]);
 
             \App\ActividadAplicada::create([
                 'actividad_codigo' => 'VDS',
-                'servicio_esp_id' => $i,
+                'servicio_id' => $i,
                 'estado' => 'cargado'
             ]);
 
             \App\ActividadAplicada::create([
                 'actividad_codigo' => 'VA',
-                'servicio_esp_id' => $i,
+                'servicio_id' => $i,
                 'estado' => 'cargado'
             ]);
 
             \App\ActividadAplicada::create([
                 'actividad_codigo' => 'VL',
-                'servicio_esp_id' => $i,
+                'servicio_id' => $i,
                 'estado' => 'cargado'
             ]);
         }
@@ -47,13 +47,13 @@ class ActividadAplicadaSeeder extends Seeder
 
             \App\ActividadAplicada::create([
                 'actividad_codigo' => 'VDS',
-                'servicio_esp_id' => $i,
+                'servicio_id' => $i,
                 'estado' => 'cargado'
             ]);
 
             \App\ActividadAplicada::create([
                 'actividad_codigo' => 'VA',
-                'servicio_esp_id' => $i,
+                'servicio_id' => $i,
                 'estado' => 'cargado'
             ]);
         }

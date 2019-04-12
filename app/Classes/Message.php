@@ -9,7 +9,9 @@
 namespace App\Classes;
 
 
-class Message
+abstract class Message
 {
-
+    const dataCreated = 'Data created succesfully';
+    const dataUpdated = 'Data updated succesfully';
+    const dataDeleted = 'Data deleted succesfully';
 }

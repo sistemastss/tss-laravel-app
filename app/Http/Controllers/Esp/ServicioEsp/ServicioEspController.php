@@ -7,11 +7,8 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Helpers\Helper;
 use App\Http\Resources\ServicioEspResource;
 use App\ServicioEsp;
-use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Arr;
 
 class ServicioEspController extends ApiController
 {
@@ -23,7 +20,7 @@ class ServicioEspController extends ApiController
      */
     public function index(Request $request, ServicioEsp $servicioEsp)
     {
-        $records = $servicioEsp->active()->orderBy('id', 'DESC')->get();
+        $records = $servicioEsp->orderBy('id', 'DESC')->get();
         $data = ServicioEspResource::collection($records);
         return $this->showAll($data);
     }
@@ -32,19 +29,21 @@ class ServicioEspController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  CentroCosto $centroCosto
      * @return \Illuminate\Http\Response
      * @throws
      */
     public function store(Request $request, CentroCosto $centroCosto)
     {
-        $value = $this->transformResponse($request);
+        $values = $this->transformResponse($request);
 
-        foreach ($value as $item) {
-            /** @var ServicioEsp $record */
-            $record = $centroCosto->serviciosEsp()->create($item);
-            $record->actividadAplicada()->createMany($item['actividades']);
-        }
-        return $this->showMessage('Esp guardados exitosamente', 201);
+        $centroCosto->servicioEsp()->createMany($values)->each(
+            function ($esp) {
+                $this->crearActividades($esp);
+            }
+        );
+
+        return $this->showMessage('Services created successfully', Response::HTTP_CREATED);
     }
 
     /**
@@ -90,57 +89,61 @@ class ServicioEspController extends ApiController
         }
     }
 
+    /**
+     * @param ServicioEsp $esp
+     */
+    private function crearActividades(ServicioEsp $esp) {
+
+        $actividades = ServicioEsp::getActividades($esp->tipo_esp);
+
+        if (count($actividades) == 0) {
+            return;
+        }
+
+        foreach ($actividades as $actividad) {
+            $esp->actividades()->create(['actividad_codigo' => $actividad]);
+        }
+
+    }
+
 
     /**
      * @param Request $request
-     * @return array|null
+     * @return array
      * @throws \Illuminate\Validation\ValidationException
      */
     private function transformResponse(Request $request) {
-        $data = $request->all();
-        $esp = [];
-
+        $values = $request->all();
+        $data = [];
         $rules = [
-            'ciudadDesarrollo'      => 'required|string',
-            'nombre'                => 'required|string',
-            'documento'             => 'required|numeric',
-            'departamento'          => 'required|string',
-            'ciudad'                => 'required|string',
-            'telefono'              => 'required|numeric',
-            'correo'                => 'required|email',
-            'descripcion'           => 'required|string',
-            'actividades'           => 'required'
+            'evaluado'          => 'required|string',
+            'tipoDocumento'     => 'required|string',
+            'documento'         => 'required|numeric',
+            'telefono'          => 'required|numeric',
+            'email'             => 'required|email',
+            'ciudad'            => 'required|string',
+            'direccion'         => 'required|string',
+            'observaciones'     => 'required|string',
+            'tipoEsp'           => 'required|string',
+            'aceptarTerminos'   => 'required|boolean',
         ];
 
-        // validations
-        foreach ($data as $value) {
+        foreach ($values as $value) {
             Helper::validator($value, $rules);
-        }
-
-        // transform data
-        foreach ($data as $value) {
-            $actividades = $value['actividades'];
-            $filtro = [];
-            foreach ($actividades as $key => $val) {
-                if ($val) {
-                    $filtro[] = ['actividad_codigo' =>  $key];
-                }
-
-            }
-
-            $esp[] =  [
-                'ciudad_desarrollo'     => $value['ciudadDesarrollo'],
-                'nombre'                => $value['nombre'],
-                'documento'             => $value['documento'],
-                'departamento'          => $value['departamento'],
-                'ciudad'                => $value['ciudad'],
-                'telefono'              => $value['telefono'],
-                'correo'                => $value['correo'],
-                'descripcion'           => $value['descripcion'],
-                'anexo'                 => $value['anexo'] ? $value['anexo'] : null,
-                'actividades'           => $filtro
+            $data[] = [
+                'evaluado'          => $value['evaluado'],
+                'tipo_documento'    => $value['tipoDocumento'],
+                'documento'         => $value['documento'],
+                'telefono'          => $value['telefono'],
+                'email'             => $value['email'],
+                'ciudad'            => $value['ciudad'],
+                'direccion'         => $value['direccion'],
+                'observaciones'     => $value['observaciones'],
+                'tipo_esp'          => $value['tipoEsp'],
+                'aceptar_terminos'  => $value['aceptarTerminos'],
             ];
         }
-        return $esp;
+
+        return $data;
     }
 }

@@ -3,15 +3,19 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\ServicioEsp::class, function (Faker $faker) {
+    static $i = 0;
     return [
-        'ciudad_desarrollo' => $faker->city,
-        'nombre' => $faker->name,
+        'centro_costo_id' => ++$i,
+        'evaluado' => $faker->name,
+        'tipo_documento' => 'cc',
         'documento' => $faker->randomNumber(),
-        'departamento' => $faker->word,
-        'ciudad' => $faker->city,
         'telefono' => $faker->randomNumber(),
-        'correo' => $faker->email,
-        'descripcion' => $faker->text,
-        'anexo' => $faker->text,
+        'email' => $faker->email,
+        'ciudad' => $faker->randomElement(['Bogota', 'Cali', 'Medellin']),
+        'direccion' => $faker->address,
+        'observaciones' => $faker->text,
+        'tipo_esp' => $faker->randomElement(['basico', 'integral', 'avanzado']),
+        'aceptar_terminos' => true,
+        'anexo' => $faker->word,
     ];
 });

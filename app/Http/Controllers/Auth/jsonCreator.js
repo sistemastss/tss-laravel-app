@@ -11,36 +11,58 @@ const data = {
     },
     "serviciosEsp": [
         {
-            "nombre": "cristian stiven puenguenan",
+            "evaluado": "cristian puenguenan",
             "documento": 1026595856,
-            "departamento": "cundinamarca",
-            "ciudad": "bogota",
-            "ciudadDesarrollo": "Bogota",
-            "telefono": 3602344,
-            "correo": "styven21121@gmail.com",
-            "observaciones": "",
-            "anexo": "Hoja_de_vida.docx",
-            "actividades": [
-                "historialJudicial",
-                "visitaDomiciliaria",
-                "verificacionLaboral"
-            ]
+            "telefono": 3123423,
+            "email": "styven21121@gmail.com",
+            "ciudad": "Bogota",
+            "direccion": "cll 16 n 20-16",
+            "observaciones": "ninguna",
+            "tipoEsp": "basico",
+            "aceptarTerminos": true
         },
         {
-            "nombre": "2 cristian stiven puenguenan",
-            "documento": 1026595816,
+            "evaluado": "Andres velez",
+            "documento": 6543456765,
+            "telefono": 423234,
+            "email": "andres@gmail.com",
+            "ciudad": "Bogota",
+            "direccion": "cll 65 n 20-16",
+            "observaciones": "ninguna",
+            "tipoEsp": "basico",
+            "aceptarTerminos": true
+        }
+    ],
+    "poligrafias": [
+        {
+            "evaluado": "cristian puenguenan",
+            "documento": 123523,
             "departamento": "cundinamarca",
             "ciudad": "bogota",
-            "ciudadDesarrollo": "Bogota",
-            "telefono": 3602344,
-            "correo": "styven21121@gmail.com",
-            "observaciones": "",
-            "anexo": "Hoja_de_vida.docx",
-            "actividades": [
-                "historialJudicial",
-                "visitaDomiciliaria",
-                "verificacionLaboral"
-            ]
+            "telefono": 2123232,
+            "email": "st@gmail.com",
+            "contexto": "context",
+            "tipoPoligrafia": "pre-empleo",
+        },
+        {
+            "evaluado": "nadie",
+            "documento": 234354,
+            "departamento": "cundinamarca",
+            "ciudad": "bogota",
+            "telefono": 756434,
+            "email": "nobody@gmail.com",
+            "contexto": "context",
+            "tipoPoligrafia": "pre-empleo",
+        }
+    ],
+    'investigacion': [
+        {
+            "ciudad": 'bogota',
+            "descripcion": "descripcion de algo"
+        },
+        {
+            "ciudad": 'bogota',
+            "descripcion": "descripcion de algo xd"
         }
     ]
 };

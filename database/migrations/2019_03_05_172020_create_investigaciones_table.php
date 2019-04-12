@@ -15,7 +15,12 @@ class CreateInvestigacionesTable extends Migration
     {
         Schema::create('investigaciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('servicio_id');
+            $table->integer('centro_costo_id');
+            $table->string('ciudad');
+            $table->text('descripcion');
+            $table->string('anexo')->nullable();
+            $table->string('tipo_servicio')->default('inv');
+            $table->string('estado')->default("proceso");
             $table->timestamps();
         });
     }

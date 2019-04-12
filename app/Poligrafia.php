@@ -6,18 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Poligrafia extends Model
 {
-    //
-
     protected $table = 'poligrafia';
 
     protected $fillable = [
-        'persona_evaluada_id',
-        'tipo_prueba',
-        'cargo_aplica',
-        'adjunto',
+        'centro_costo_id',
+        'evaluado',
+        'tipo_documento',
+        'documento',
+        'departamento',
+        'ciudad',
+        'telefono',
+        'email',
+        'contexto',
+        'tipo_poligrafia',
+        'anexo',
     ];
 
-    public function personaEvaluada() {
-        return $this->belongsTo(PersonaEvaluada::class, 'persona_evaluada_id');
+    public function centroCosto()
+    {
+        return $this->belongsTo(CentroCosto::class);
+    }
+
+    public function actividades()
+    {
+        return $this->morphMany(ActividadAplicada::class, 'actividad');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Investigaciones;
 
 use App\CentroCosto;
+use App\Classes\Message;
 use App\Exceptions\ModelNotUpdateException;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Helpers\Helper;
@@ -21,8 +22,7 @@ class InvestigacionesController extends ApiController
      */
     public function index(Request $request, Investigacion $investigaciones)
     {
-        $records = $investigaciones->all();
-
+        $records = $investigaciones->orderBy('id', 'DESC')->get();
         if ($records->count() == 0) {
             Helper::throwModelNotFoud(Investigacion::class);
         }
@@ -33,18 +33,16 @@ class InvestigacionesController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param $id
+     * @param \Illuminate\Http\Request  $request
+     * @param CentroCosto $centroCosto
      * @return \Illuminate\Http\Response
      * @throws
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, CentroCosto $centroCosto)
     {
-        /** @var $centroCosto CentroCosto*/
-        $centroCosto = CentroCosto::find($id);
         $values = $this->transformRequest($request);
-        $centroCosto->investigaciones()->createMany($values);
-        return $this->showMessage('Investigaciones creadas exitosamente', 201);
+        $centroCosto->investigacion()->createMany($values);
+        return $this->showMessage(Message::dataCreated, Response::HTTP_CREATED);
     }
 
     /**
@@ -105,18 +103,18 @@ class InvestigacionesController extends ApiController
      * @return array
      */
     public function transformRequest(Request $request) {
-        $req = $request->all();
+        $values = $request->all();
         $data = [];
         $rules = [
             'ciudad' => 'required',
             'descripcion' => 'required',
         ];
 
-        foreach ($req as $value) {
+        foreach ($values as $value) {
             Helper::validator($value, $rules);
             $data[] = [
                 'ciudad'        => $value['ciudad'],
-                'anexo'         => $value['anexo'] ? $value['anexo'] : null,
+                //'anexo'         => $value['anexo'] ? $value['anexo'] : null,
                 'descripcion'   => $value['descripcion'],
             ];
         }
