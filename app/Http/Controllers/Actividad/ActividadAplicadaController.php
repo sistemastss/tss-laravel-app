@@ -40,7 +40,6 @@ class ActividadAplicadaController extends ApiController
      */
     public function store(Request$request, $servicio)
     {
-
         $values = array_map(
             function ($value) {return ['actividad_codigo' => $value['actividadCodigo']];},
             $request->get('actividades')

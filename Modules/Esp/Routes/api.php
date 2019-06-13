@@ -20,3 +20,11 @@ Route::middleware('auth:api')->get('/esp', function (Request $request) {
 route::get('/esp-module', function () {
    return 'Hello world';
 });
+
+Route::apiResource('esp', 'EspController', ['except' =>'delete']);
+
+Route::apiResource('esp.visita-domiciliaria', 'VisitaDomiciliaria\VisitaDomiciliariaController', ['only' => ['index', 'store']]);
+Route::apiResource('visita-domiciliaria', 'VisitaDomiciliaria\VisitaDomiciliariaController', ['except' => ['index', 'store', 'show']]);
+
+Route::apiResource('visita-domiciliaria.seguimiento', 'VisitaDomiciliaria\Seguimiento\SeguimientoController', ['only' => ['index', 'store']]);
+Route::apiResource('seguimiento', 'VisitaDomiciliaria\Seguimiento\SeguimientoController', ['except' => ['index', 'store', 'show']]);

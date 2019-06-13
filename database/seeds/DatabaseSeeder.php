@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\ServicioEsp;
-use \App\Investigacion;
-use \App\Poligrafia;
-use \App\CentroCosto;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RolesSeeder::class);
         $this->call(Usuarios::class);
-        $this->call(ActividadDisponibleSeeder::class);
+        $this->call(ActividadSeeder::class);
         // $this->call(ActividadAplicadaSeeder::class);
         // $this->call(ActividadAsignadaSeeder::class);
 
@@ -36,7 +32,7 @@ class DatabaseSeeder extends Seeder
         // todo centro de costo factory
         $cantidad = 2; // controla la cantidad de centros de costo a crear
 
-        factory(CentroCosto::class, $cantidad)->create()->each(
+        /*factory(CentroCosto::class, $cantidad)->create()->each(
             function (CentroCosto $centroCosto) {
                 $centroCosto->servicioEsp()->saveMany(factory(ServicioEsp::class, 2)->create());
             }
@@ -52,7 +48,7 @@ class DatabaseSeeder extends Seeder
             function (CentroCosto $centroCosto) {
                 $centroCosto->poligrafia()->saveMany(factory(Poligrafia::class, 2)->create());
             }
-        );
+        );*/
 
 
         // persona evaluada

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Modules\Usuario\Entities\Usuario;
+use Modules\Usuario\Entities\Cliente;
+use Faker\Factory;
 
 class Usuarios extends Seeder
 {
@@ -12,114 +15,125 @@ class Usuarios extends Seeder
     public function run()
     {
         //
-        $faker = \Faker\Factory::create();
+        $faker = Factory::create();
 
+        Usuario::create([
+            'rol_id'            => 1,
+            'nombre'            => $faker->name,
+            'direccion'         => $faker->address,
+            'telefono'          => $faker->randomNumber(),
+            'celular'           => $faker->randomNumber(),
+            'tipo_documento'    => 'cedula',
+            'documento'         => $faker->randomNumber(),
+            'ciudad'            => $faker->city,
+            'email'             => 'user1@tss.com',
+            'contrasena'        => '12345'
+        ]);
 
-        //analista esp
-        \App\Usuario::create([
-            'rol_id' => 3,
-            'nombre' => 'cristian esp',
-            'identificacion' => "987654332",
-            'direccion' => $faker->address,
-            'mail' => "analistaesp@tss.com",
-            'telefono' => $faker->randomNumber(),
-            'contrasena' => '1234',
-            'active' => true,
-            'api_token' => str_random(60),
+        Usuario::create([
+            'rol_id'            => 2,
+            'nombre'            => $faker->name,
+            'direccion'         => $faker->address,
+            'telefono'          => $faker->randomNumber(),
+            'celular'           => $faker->randomNumber(),
+            'tipo_documento'    => 'cedula',
+            'documento'         => $faker->randomNumber(),
+            'ciudad'            => $faker->city,
+            'email'             => 'user2@tss.com',
+            'contrasena'        => '12345'
+        ]);
+
+        Usuario::create([
+            'rol_id'            => 3,
+            'nombre'            => $faker->name,
+            'direccion'         => $faker->address,
+            'telefono'          => $faker->randomNumber(),
+            'celular'           => $faker->randomNumber(),
+            'tipo_documento'    => 'cedula',
+            'documento'         => $faker->randomNumber(),
+            'ciudad'            => $faker->city,
+            'email'             => 'user3@tss.com',
+            'contrasena'        => '12345'
+        ]);
+
+        Usuario::create([
+            'rol_id'            => 4,
+            'nombre'            => $faker->name,
+            'direccion'         => $faker->address,
+            'telefono'          => $faker->randomNumber(),
+            'celular'           => $faker->randomNumber(),
+            'tipo_documento'    => 'cedula',
+            'documento'         => $faker->randomNumber(),
+            'ciudad'            => $faker->city,
+            'email'             => 'user4@tss.com',
+            'contrasena'        => '12345'
         ]);
 
 
-        \App\Usuario::create([
-            'rol_id' => 3,
-            'nombre' => 'carlos esp',
-            'identificacion' => "987653333",
-            'direccion' => $faker->address,
-            'mail' => "analistaespcarlos@tss.com",
-            'telefono' => $faker->randomNumber(),
-            'contrasena' => 'aesp1234',
-            'active' => true,
-            'api_token' => str_random(60),
+        Usuario::create([
+            'rol_id'            => 5,
+            'nombre'            => $faker->name,
+            'direccion'         => $faker->address,
+            'telefono'          => $faker->randomNumber(),
+            'celular'           => $faker->randomNumber(),
+            'tipo_documento'    => 'cedula',
+            'documento'         => $faker->randomNumber(),
+            'ciudad'            => $faker->city,
+            'email'             => 'user5@tss.com',
+            'contrasena'        => '12345'
         ]);
 
 
-
-        \App\Usuario::create([
-            'rol_id' => 3,
-            'nombre' => 'andres esp',
-            'identificacion' => "10265958312",
-            'direccion' => $faker->address,
-            'mail' => "analistaespandr@tss.com",
-            'telefono' => $faker->randomNumber(),
-            'contrasena' => 'aesp1234',
-            'active' => true,
-            'api_token' => str_random(60),
-        ]);
-
-        //administrador general
-
-        \App\Usuario::create([
-            'rol_id' => 1,
-            'nombre' => 'cristian admin',
-            'identificacion' => "123",
-            'direccion' => $faker->address,
-            'mail' => "admin@tss.com",
-            'telefono' => $faker->randomNumber(),
-            'contrasena' => 1234,
-            'active' => true,
-            'api_token' => str_random(60),
+        Usuario::create([
+            'rol_id'            => 6,
+            'nombre'            => $faker->name,
+            'direccion'         => $faker->address,
+            'telefono'          => $faker->randomNumber(),
+            'celular'           => $faker->randomNumber(),
+            'tipo_documento'    => 'cedula',
+            'documento'         => $faker->randomNumber(),
+            'ciudad'            => $faker->city,
+            'email'             => 'user6@tss.com',
+            'contrasena'        => '12345'
         ]);
 
 
-        \App\Usuario::create([
-            'rol_id' => 8,
-            'nombre' => 'cristian dope',
-            'identificacion' => "123433",
-            'direccion' => $faker->address,
-            'mail' => "dope@tss.com",
-            'telefono' => $faker->randomNumber(),
-            'contrasena' => 1122233,
-            'active' => true,
-            'api_token' => str_random(60),
+        Usuario::create([
+            'rol_id'            => 7,
+            'nombre'            => $faker->name,
+            'direccion'         => $faker->address,
+            'telefono'          => $faker->randomNumber(),
+            'celular'           => $faker->randomNumber(),
+            'tipo_documento'    => 'cedula',
+            'documento'         => $faker->randomNumber(),
+            'ciudad'            => $faker->city,
+            'email'             => 'user7@tss.com',
+            'contrasena'        => '12345'
         ]);
 
 
-        \App\Usuario::create([
-            'rol_id' => 6,
-            'nombre' => 'cristian cliente',
-            'identificacion' => "1234",
-            'direccion' => $faker->address,
-            'mail' => "cliente@tss.com",
-            'telefono' => $faker->randomNumber(),
-            'contrasena' => 12346,
-            'active' => true,
-            'api_token' => str_random(60),
+        Usuario::create([
+            'rol_id'            => 8,
+            'nombre'            => $faker->name,
+            'direccion'         => $faker->address,
+            'telefono'          => $faker->randomNumber(),
+            'celular'           => $faker->randomNumber(),
+            'tipo_documento'    => 'cedula',
+            'documento'         => $faker->randomNumber(),
+            'ciudad'            => $faker->city,
+            'email'             => 'user8@tss.com',
+            'contrasena'        => '12345'
         ]);
 
 
-        \App\Usuario::create([
-            'rol_id' => 7,
-            'nombre' => 'cristian freelance',
-            'identificacion' => "12331232131",
-            'direccion' => $faker->address,
-            'mail' => "totalsecurity@tss.com",
-            'telefono' => $faker->randomNumber(),
-            'contrasena' => "freelance1",
-            'active' => true,
-            'api_token' => str_random(60),
+        Cliente::create([
+            'usuario_id'            => 6,
+            'sistema_gestion'       => true,
+            'documento_rep_legal'   => 123456,
+            'analista_id'           => 3,
         ]);
 
-        \App\Usuario::create([
-            'rol_id' => 7,
-            'nombre' => 'cristian 2 freelance',
-            'identificacion' => "34534234",
-            'direccion' => $faker->address,
-            'mail' => "totalsecurity@tss.com",
-            'telefono' => $faker->randomNumber(),
-            'contrasena' =>"freelance2",
-            'active' => true,
-            'api_token' => str_random(60),
-        ]);
-
-        factory(\App\Usuario::class, 100)->create();
+        // factory(Usuario::class, 100)->create();
     }
+
 }

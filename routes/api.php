@@ -17,13 +17,12 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::post('/login', 'UsuarioController@getToken');
+/*Route::post('/login', 'UsuarioController@getToken');
 
 Route::apiResource('clientes', 'ClienteController', ['only' => ['index']]);
 
 Route::apiResource('centro-costo', 'CentroCostoController');
 Route::apiResource('centro-costo.servicio-esp', 'Esp\ServicioEsp\ServicioEspController', ['only' => ['store']]);
-Route::apiResource('servicio-esp', 'Esp\ServicioEsp\ServicioEspController', ['except' =>'delete']);
 Route::apiResource('centro-costo.servicio-esp-masivo', 'Esp\ServicioEsp\ServicioEspMasivoController', ['only' => ['store']]);
 // Route::apiResource('centro-costo.servicio-esp', 'Esp\ServicioEsp\ServicioEspController', ['only' => ['store']]);
 
@@ -34,11 +33,13 @@ Route::apiResource('freelance.servicios-esp', 'Esp\ServicioEsp\FrelanceControlle
 
 Route::apiResource('actividades-disponibles', 'Actividad\ActividadDisponibleController');
 Route::apiResource('servicio-esp.actividades', 'Actividad\ActividadAplicadaController', ['only' => ['index']]);
-Route::apiResource('actividad-aplicada', 'ActividadesController', ['only' => ['show', 'update']]);
+Route::apiResource('actividad-aplicada', 'ActividadAplicadaController', ['only' => ['show', 'update']]);
 Route::apiResource('actividad-aplicada.actividad-asignada', 'Actividad\ActividadAsignadaController');
 
 
 Route::apiResource('servicios', 'ServicioController', ['only', ['index']]);
+
+*/
 
 
 /*
@@ -48,7 +49,7 @@ Route::apiResource('servicios', 'ServicioController', ['only', ['index']]);
 */
 
 //freelance
-Route::apiResource('freelance', 'Usuarios\FreelanceController');
+//Route::apiResource('freelance', 'Usuarios\FreelanceController');
 
 
 
@@ -60,7 +61,7 @@ Route::apiResource('freelance', 'Usuarios\FreelanceController');
 | Historial judicial
 |--------------------------------------------------------------------------|
 */
-Route::apiResource('servicio-esp.historial-judicial', 'Esp\HistorialJudicial\HistorialjudicialController', ['only' => ['index', 'store', 'update']]);
+//Route::apiResource('servicio-esp.historial-judicial', 'Esp\HistorialJudicial\HistorialjudicialController', ['only' => ['index', 'store', 'update']]);
 
 
 
@@ -73,29 +74,29 @@ Route::apiResource('servicio-esp.historial-judicial', 'Esp\HistorialJudicial\His
 | Visita domiciliaria
 |--------------------------------------------------------------------------
 */
-Route::apiResource('servicio-esp.visita-domiciliaria', 'Esp\VisitaDomiciliariaController', ['only' => ['index']]);
+//Route::apiResource('servicio-esp.visita-domiciliaria', 'Esp\VisitaDomiciliariaController', ['only' => ['index']]);
 
 //Verificacion documental apiResource
-Route::apiResource('servicio-esp.verificacion-documental', 'Esp\VerificacionDocumental\VerificacionDocumentalController');
+//Route::apiResource('servicio-esp.verificacion-documental', 'Esp\VerificacionDocumental\VerificacionDocumentalController');
 
 
 //Estado salubridad apiResource
-Route::apiResource('servicio-esp.estado-salubridad', 'Esp\EstadoSalubridad\EstadoSalubridadController');
+//Route::apiResource('servicio-esp.estado-salubridad', 'Esp\EstadoSalubridad\EstadoSalubridadController');
 
 
 //Nucleo familiar apiResource
-Route::apiResource('servicio-esp.nucleo-familiar', 'Esp\NucleoFamiliar\NucleoFamiliarController');
+/*Route::apiResource('servicio-esp.nucleo-familiar', 'Esp\NucleoFamiliar\NucleoFamiliarController');
 Route::apiResource('servicio-esp.hijos', 'Esp\NucleoFamiliar\HijoController');
 Route::apiResource('servicio-esp.informacion-familiar', 'Esp\NucleoFamiliar\InformacionFamiliarController');
 Route::apiResource('servicio-esp.referencias', 'Esp\NucleoFamiliar\ReferenciaController');
-
+*/
 
 //Entorno habitacional apiResource
-Route::apiResource('servicio-esp.entorno-habitacional', 'Esp\EntornoHabitacional\EntornoHabitacionalController');
+//Route::apiResource('servicio-esp.entorno-habitacional', 'Esp\EntornoHabitacional\EntornoHabitacionalController');
 
 
 //Modus vivendi apiResource
-Route::apiResource('servicio-esp.modus-vivendi', 'Esp\ModusVivendi\ModusVivendiController');
+/*Route::apiResource('servicio-esp.modus-vivendi', 'Esp\ModusVivendi\ModusVivendiController');
 Route::apiResource('servicio-esp.bienes-inmuebles', 'Esp\ModusVivendi\BienesInmueblesController');
 Route::apiResource('servicio-esp.bienes-muebles', 'Esp\ModusVivendi\BienesMueblesController');
 Route::apiResource('servicio-esp.capacidad-endeudamiento', 'Esp\ModusVivendi\CapacidadEndeudamientoController');
@@ -103,20 +104,19 @@ Route::apiResource('servicio-esp.referencias-bancarias', 'Esp\ModusVivendi\Refer
 
 
 
-
 Route::get('funcionarios/{id}', 'ClienteController@index');
 
 Route::get('funcionarios/{id}', 'ClienteController@index');
 
 
-
+*/
 
 /*
 |--------------------------------------------------------------------------
 | Verificacion adademica
 |--------------------------------------------------------------------------
 */
-Route::apiResource('servicio-esp.verificacion-academica', 'Esp\VerificacionAcademica\VerificacionAcademicaController');
+//Route::apiResource('servicio-esp.verificacion-academica', 'Esp\VerificacionAcademica\VerificacionAcademicaController');
 
 
 
@@ -129,7 +129,7 @@ Route::apiResource('servicio-esp.verificacion-academica', 'Esp\VerificacionAcade
 | Verificacion laboral
 |--------------------------------------------------------------------------
 */
-Route::apiResource('servicio-esp.verificacion-laboral', 'Esp\VerificacionLaboral\VerificacionLaboralController');
+//Route::apiResource('servicio-esp.verificacion-laboral', 'Esp\VerificacionLaboral\VerificacionLaboralController');
 
 
 
@@ -142,7 +142,7 @@ Route::apiResource('servicio-esp.verificacion-laboral', 'Esp\VerificacionLaboral
 | Dictamen grafologico
 |--------------------------------------------------------------------------
 */
-Route::apiResource('servicio-esp.dictamen-grafologico', 'Esp\Comun\DictamenGrafologicoController');
+//Route::apiResource('servicio-esp.dictamen-grafologico', 'Esp\Comun\DictamenGrafologicoController');
 
 
 
@@ -155,7 +155,7 @@ Route::apiResource('servicio-esp.dictamen-grafologico', 'Esp\Comun\DictamenGrafo
 | Decadactilar
 |--------------------------------------------------------------------------
 */
-Route::apiResource('servicio-esp.decadactilar', 'Esp\Comun\DecaDactilarController');
+//Route::apiResource('servicio-esp.decadactilar', 'Esp\Comun\DecaDactilarController');
 
 
 
@@ -168,12 +168,12 @@ Route::apiResource('servicio-esp.decadactilar', 'Esp\Comun\DecaDactilarControlle
 | Prueba psicotecnica
 |--------------------------------------------------------------------------
 */
-Route::apiResource('servicio-esp.prueba-psicotecnica', 'Esp\Comun\PruebaPsicotecnicaController');
+/*Route::apiResource('servicio-esp.prueba-psicotecnica', 'Esp\Comun\PruebaPsicotecnicaController');
 
 Route::get('funcionarios/{id}', 'ClienteController@index');
 
 
-
+*/
 
 
 /*
@@ -181,14 +181,14 @@ Route::get('funcionarios/{id}', 'ClienteController@index');
 | Evaluacion financiera
 |--------------------------------------------------------------------------
 */
-Route::apiResource('servicio-esp.evaluacion-financiera', 'Esp\EvaluacionFinanciera\EvaluacionFinancieraController');
+/*Route::apiResource('servicio-esp.evaluacion-financiera', 'Esp\EvaluacionFinanciera\EvaluacionFinancieraController');
 Route::apiResource('servicio-esp.cuentas-bancarias', 'Esp\EvaluacionFinanciera\CuentaBancariaController');
 Route::apiResource('servicio-esp.obligaciones-extinguidas', 'Esp\EvaluacionFinanciera\ObligacionExtinguidaController');
 Route::apiResource('servicio-esp.obligaciones-mora', 'Esp\EvaluacionFinanciera\ObligacionMoraController');
 Route::apiResource('servicio-esp.obligaciones-vigentes', 'Esp\EvaluacionFinanciera\ObligacionVigenteController');
 Route::apiResource('servicio-esp.obligaciones-reales', 'Esp\EvaluacionFinanciera\ObligacionVigenteRealController');
 
-
+*/
 
 
 
@@ -199,7 +199,7 @@ Route::apiResource('servicio-esp.obligaciones-reales', 'Esp\EvaluacionFinanciera
 | Consolidado
 |--------------------------------------------------------------------------
 */
-Route::apiResource('servicio-esp.consolidado', 'Consolidado\ConsolidadoController');
+/*Route::apiResource('servicio-esp.consolidado', 'Consolidado\ConsolidadoController');
 Route::apiResource('consolidado.datos-informe', 'Consolidado\DatosInformeController');
 
 
@@ -208,7 +208,7 @@ Route::post('mail', 'MailController@index');
 
 Route::Post('upload-informe/{id}', 'InformePdfController@index');
 
-
+*/
 
 
 
@@ -217,7 +217,7 @@ Route::Post('upload-informe/{id}', 'InformePdfController@index');
  *
  * INVESTIGACIONES
  */
-Route::apiResource('centro-costo.investigaciones', 'Investigaciones\InvestigacionesController', ['only', ['store']]);
+/*Route::apiResource('centro-costo.investigaciones', 'Investigaciones\InvestigacionesController', ['only', ['store']]);
 // Route::post('centro-costo/{id}/investigaciones', 'Investigaciones\InvestigacionesController@store');
 Route::apiResource('investigaciones', 'Investigaciones\InvestigacionesController', ['except', ['store']]);
 
@@ -225,13 +225,14 @@ Route::apiResource('investigaciones', 'Investigaciones\InvestigacionesController
 Route::get('investigaciones/{servicio}/actividades', 'Actividad\ActividadAplicadaController@index');
 Route::post('investigaciones/{servicio}/actividades', 'Actividad\ActividadAplicadaController@store');
 
-
+*/
 
 
 /*
  *
  * POLIGRAFIA
  */
-Route::apiResource('centro-costo.poligrafia', 'PoligrafiaController', ['only', ['store']]);
+/*Route::apiResource('centro-costo.poligrafia', 'PoligrafiaController', ['only', ['store']]);
 Route::apiResource('poligrafia', 'PoligrafiaController', ['only', ['index']]);
 
+*/

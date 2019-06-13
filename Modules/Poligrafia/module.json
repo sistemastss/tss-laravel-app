@@ -1,0 +1,14 @@
+{
+    "name": "Poligrafia",
+    "alias": "poligrafia",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Poligrafia\\Providers\\PoligrafiaServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Modules\Usuario\Entities\Roles;
 
 class RolesSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class RolesSeeder extends Seeder
         //se puede agregar mas roles
 
         //
-        \App\Roles::insert([
+        Roles::insert([
             [
                 // 1
                 'rol' => 'Administrador general',
