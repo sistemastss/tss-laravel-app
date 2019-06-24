@@ -13,12 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
+
+require __DIR__.'/esp.php';
+require __DIR__.'/usuario.php';
+
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
 
-/*Route::post('/login', 'UsuarioController@getToken');
+// Route::post('/login', 'UsuarioController@getToken');
 
+/*
 Route::apiResource('clientes', 'ClienteController', ['only' => ['index']]);
 
 Route::apiResource('centro-costo', 'CentroCostoController');
@@ -42,6 +47,8 @@ Route::apiResource('servicios', 'ServicioController', ['only', ['index']]);
 */
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Usuarios
@@ -49,9 +56,9 @@ Route::apiResource('servicios', 'ServicioController', ['only', ['index']]);
 */
 
 //freelance
-//Route::apiResource('freelance', 'Usuarios\FreelanceController');
+// Route::apiResource('freelance', 'Usuarios\FreelanceController');
 
-
+// Route::get('freelance', '');
 
 
 

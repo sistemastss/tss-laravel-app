@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Modules\Usuario\Entities\Usuario;
-use Modules\Usuario\Entities\Cliente;
 use Faker\Factory;
+use App\Models\Usuario\Usuario;
+use App\Models\Usuario\Cliente;
 
 class Usuarios extends Seeder
 {
@@ -17,7 +17,7 @@ class Usuarios extends Seeder
         //
         $faker = Factory::create();
 
-        Usuario::create([
+        usuario::create([
             'rol_id'            => 1,
             'nombre'            => $faker->name,
             'direccion'         => $faker->address,
@@ -27,7 +27,7 @@ class Usuarios extends Seeder
             'documento'         => $faker->randomNumber(),
             'ciudad'            => $faker->city,
             'email'             => 'user1@tss.com',
-            'contrasena'        => '12345'
+            'password'          => Hash::make('123456')
         ]);
 
         Usuario::create([
@@ -40,7 +40,7 @@ class Usuarios extends Seeder
             'documento'         => $faker->randomNumber(),
             'ciudad'            => $faker->city,
             'email'             => 'user2@tss.com',
-            'contrasena'        => '12345'
+            'password'          => Hash::make('123456')
         ]);
 
         Usuario::create([
@@ -53,7 +53,7 @@ class Usuarios extends Seeder
             'documento'         => $faker->randomNumber(),
             'ciudad'            => $faker->city,
             'email'             => 'user3@tss.com',
-            'contrasena'        => '12345'
+            'password'          => Hash::make('123456')
         ]);
 
         Usuario::create([
@@ -66,7 +66,7 @@ class Usuarios extends Seeder
             'documento'         => $faker->randomNumber(),
             'ciudad'            => $faker->city,
             'email'             => 'user4@tss.com',
-            'contrasena'        => '12345'
+            'password'          => Hash::make('123456')
         ]);
 
 
@@ -80,7 +80,7 @@ class Usuarios extends Seeder
             'documento'         => $faker->randomNumber(),
             'ciudad'            => $faker->city,
             'email'             => 'user5@tss.com',
-            'contrasena'        => '12345'
+            'password'          => Hash::make('123456')
         ]);
 
 
@@ -94,7 +94,7 @@ class Usuarios extends Seeder
             'documento'         => $faker->randomNumber(),
             'ciudad'            => $faker->city,
             'email'             => 'user6@tss.com',
-            'contrasena'        => '12345'
+            'password'          => Hash::make('123456')
         ]);
 
 
@@ -108,7 +108,7 @@ class Usuarios extends Seeder
             'documento'         => $faker->randomNumber(),
             'ciudad'            => $faker->city,
             'email'             => 'user7@tss.com',
-            'contrasena'        => '12345'
+            'password'          => Hash::make('123456')
         ]);
 
 
@@ -122,7 +122,7 @@ class Usuarios extends Seeder
             'documento'         => $faker->randomNumber(),
             'ciudad'            => $faker->city,
             'email'             => 'user8@tss.com',
-            'contrasena'        => '12345'
+            'password'          => Hash::make('123456')
         ]);
 
 

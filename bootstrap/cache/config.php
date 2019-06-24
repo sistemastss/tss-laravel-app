@@ -76,13 +76,15 @@
       'URL' => 'Illuminate\\Support\\Facades\\URL',
       'Validator' => 'Illuminate\\Support\\Facades\\Validator',
       'View' => 'Illuminate\\Support\\Facades\\View',
+      'JWTAuth' => 'Tymon\\JWTAuth\\Facades\\JWTAuth',
+      'JWTFactory' => 'Tymon\\JWTAuth\\Facades\\JWTFactory',
     ),
   ),
   'auth' => 
   array (
     'defaults' => 
     array (
-      'guard' => 'web',
+      'guard' => 'api',
       'passwords' => 'users',
     ),
     'guards' => 
@@ -94,7 +96,7 @@
       ),
       'api' => 
       array (
-        'driver' => 'token',
+        'driver' => 'jwt',
         'provider' => 'users',
       ),
     ),
@@ -103,7 +105,7 @@
       'users' => 
       array (
         'driver' => 'eloquent',
-        'model' => 'App\\User',
+        'model' => 'App\\Models\\Usuario\\Usuario',
       ),
     ),
     'passwords' => 
@@ -170,7 +172,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\storage\\framework/cache/data',
+        'path' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -283,10 +285,10 @@
     'orientation' => 'portrait',
     'defines' => 
     array (
-      'font_dir' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\storage\\fonts/',
-      'font_cache' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\storage\\fonts/',
+      'font_dir' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\storage\\fonts/',
+      'font_cache' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\storage\\fonts/',
       'temp_dir' => 'C:\\Users\\styve\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app',
+      'chroot' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -309,12 +311,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\storage\\app',
+        'root' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\storage\\app/public',
+        'root' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -343,6 +345,42 @@
       'time' => 2,
     ),
   ),
+  'jwt' => 
+  array (
+    'secret' => 'smaLmVF9oAv0d6BRtm21YiCobOOIGqfp',
+    'keys' => 
+    array (
+      'public' => NULL,
+      'private' => NULL,
+      'passphrase' => NULL,
+    ),
+    'ttl' => 60,
+    'refresh_ttl' => 20160,
+    'algo' => 'HS256',
+    'required_claims' => 
+    array (
+      0 => 'iss',
+      1 => 'iat',
+      2 => 'exp',
+      3 => 'nbf',
+      4 => 'sub',
+      5 => 'jti',
+    ),
+    'persistent_claims' => 
+    array (
+    ),
+    'lock_subject' => true,
+    'leeway' => 0,
+    'blacklist_enabled' => true,
+    'blacklist_grace_period' => 0,
+    'decrypt_cookies' => false,
+    'providers' => 
+    array (
+      'jwt' => 'Tymon\\JWTAuth\\Providers\\JWT\\Lcobucci',
+      'auth' => 'Tymon\\JWTAuth\\Providers\\Auth\\Illuminate',
+      'storage' => 'Tymon\\JWTAuth\\Providers\\Storage\\Illuminate',
+    ),
+  ),
   'logging' => 
   array (
     'default' => 'stack',
@@ -359,13 +397,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -428,223 +466,10 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\resources\\views/vendor/mail',
+        0 => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\resources\\views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
-  ),
-  'modules' => 
-  array (
-    'namespace' => 'Modules',
-    'stubs' => 
-    array (
-      'enabled' => false,
-      'path' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app/vendor/nwidart/laravel-modules/src/Commands/stubs',
-      'files' => 
-      array (
-        'routes/api' => 'Routes/api.php',
-        'scaffold/config' => 'Config/config.php',
-        'composer' => 'composer.json',
-        'package' => 'package.json',
-      ),
-      'replacements' => 
-      array (
-        'routes/web' => 
-        array (
-          0 => 'LOWER_NAME',
-          1 => 'STUDLY_NAME',
-        ),
-        'routes/api' => 
-        array (
-          0 => 'LOWER_NAME',
-        ),
-        'webpack' => 
-        array (
-          0 => 'LOWER_NAME',
-        ),
-        'json' => 
-        array (
-          0 => 'LOWER_NAME',
-          1 => 'STUDLY_NAME',
-          2 => 'MODULE_NAMESPACE',
-        ),
-        'views/index' => 
-        array (
-          0 => 'LOWER_NAME',
-        ),
-        'views/master' => 
-        array (
-          0 => 'LOWER_NAME',
-          1 => 'STUDLY_NAME',
-        ),
-        'scaffold/config' => 
-        array (
-          0 => 'STUDLY_NAME',
-        ),
-        'composer' => 
-        array (
-          0 => 'LOWER_NAME',
-          1 => 'STUDLY_NAME',
-          2 => 'VENDOR',
-          3 => 'AUTHOR_NAME',
-          4 => 'AUTHOR_EMAIL',
-          5 => 'MODULE_NAMESPACE',
-        ),
-      ),
-      'gitkeep' => true,
-    ),
-    'paths' => 
-    array (
-      'modules' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\Modules',
-      'assets' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\public\\modules',
-      'migration' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\database/migrations',
-      'generator' => 
-      array (
-        'config' => 
-        array (
-          'path' => 'Config',
-          'generate' => true,
-        ),
-        'command' => 
-        array (
-          'path' => 'Console',
-          'generate' => true,
-        ),
-        'migration' => 
-        array (
-          'path' => 'Database/Migrations',
-          'generate' => true,
-        ),
-        'seeder' => 
-        array (
-          'path' => 'Database/Seeders',
-          'generate' => true,
-        ),
-        'factory' => 
-        array (
-          'path' => 'Database/factories',
-          'generate' => true,
-        ),
-        'model' => 
-        array (
-          'path' => 'Entities',
-          'generate' => true,
-        ),
-        'controller' => 
-        array (
-          'path' => 'Http/Controllers',
-          'generate' => true,
-        ),
-        'filter' => 
-        array (
-          'path' => 'Http/Middleware',
-          'generate' => true,
-        ),
-        'request' => 
-        array (
-          'path' => 'Http/Requests',
-          'generate' => true,
-        ),
-        'provider' => 
-        array (
-          'path' => 'Providers',
-          'generate' => true,
-        ),
-        'assets' => 
-        array (
-          'path' => 'Resources/assets',
-          'generate' => true,
-        ),
-        'lang' => 
-        array (
-          'path' => 'Resources/lang',
-          'generate' => true,
-        ),
-        'views' => 
-        array (
-          'path' => 'Resources/views',
-          'generate' => true,
-        ),
-        'test' => 
-        array (
-          'path' => 'Tests',
-          'generate' => true,
-        ),
-        'repository' => 
-        array (
-          'path' => 'Repositories',
-          'generate' => false,
-        ),
-        'event' => 
-        array (
-          'path' => 'Events',
-          'generate' => false,
-        ),
-        'listener' => 
-        array (
-          'path' => 'Listeners',
-          'generate' => false,
-        ),
-        'policies' => 
-        array (
-          'path' => 'Policies',
-          'generate' => false,
-        ),
-        'rules' => 
-        array (
-          'path' => 'Rules',
-          'generate' => false,
-        ),
-        'jobs' => 
-        array (
-          'path' => 'Jobs',
-          'generate' => false,
-        ),
-        'emails' => 
-        array (
-          'path' => 'Emails',
-          'generate' => false,
-        ),
-        'notifications' => 
-        array (
-          'path' => 'Notifications',
-          'generate' => false,
-        ),
-        'resource' => 
-        array (
-          'path' => 'Transformers',
-          'generate' => false,
-        ),
-      ),
-    ),
-    'scan' => 
-    array (
-      'enabled' => false,
-      'paths' => 
-      array (
-        0 => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\vendor/*/*',
-      ),
-    ),
-    'composer' => 
-    array (
-      'vendor' => 'nwidart',
-      'author' => 
-      array (
-        'name' => 'Nicolas Widart',
-        'email' => 'n.widart@gmail.com',
-      ),
-    ),
-    'cache' => 
-    array (
-      'enabled' => false,
-      'key' => 'laravel-modules',
-      'lifetime' => 60,
-    ),
-    'register' => 
-    array (
-      'translations' => true,
-      'files' => 'register',
-    ),
   ),
   'queue' => 
   array (
@@ -729,7 +554,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\storage\\framework/sessions',
+    'files' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -749,9 +574,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\resources\\views',
+      0 => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\resources\\views',
     ),
-    'compiled' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app\\storage\\framework\\views',
+    'compiled' => 'C:\\Users\\styve\\Desktop\\proyectos\\total security\\tss-laravel-app - copia\\storage\\framework\\views',
   ),
   'cors' => 
   array (
@@ -784,26 +609,6 @@
   array (
     'proxies' => NULL,
     'headers' => 30,
-  ),
-  'esp' => 
-  array (
-    'name' => 'Esp',
-  ),
-  'investigacion' => 
-  array (
-    'name' => 'Investigacion',
-  ),
-  'poligrafia' => 
-  array (
-    'name' => 'Poligrafia',
-  ),
-  'shared' => 
-  array (
-    'name' => 'Shared',
-  ),
-  'usuario' => 
-  array (
-    'name' => 'Usuario',
   ),
   'tinker' => 
   array (

@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Modules\Shared\Entities\Servicio;
-use Modules\Shared\Entities\Actividad;
+use App\Models\Servicio;
+use App\Models\Actividad;
 
 class ActividadSeeder extends Seeder
 {

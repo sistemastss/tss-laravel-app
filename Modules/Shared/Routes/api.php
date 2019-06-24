@@ -17,5 +17,3 @@ Route::middleware('auth:api')->get('/shared', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('actividades', 'ActividadController');
-route::get('esp/{id}/actividades-aplicadas', 'ActividadAplicadaController@fromEsp');

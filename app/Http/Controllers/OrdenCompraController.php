@@ -2,72 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\OrdenCompra;
-use Illuminate\Http\Request;
+use App\Helpers\File;
+use App\Helpers\Helper;
+use App\Models\CentroCosto;
+use Illuminate\Support\Arr;
 
-class OrdenCompraController extends Controller
+class OrdenCompraController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  CentroCosto $centroCosto, array $payload
+     * @return
+     * @throws
      */
-    public function store(Request $request)
+    public static function store(CentroCosto $centroCosto, array $payload)
     {
-        //
-    }
+        $data = self::validateData($payload);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\OrdenCompra  $ordenCompra
-     * @return \Illuminate\Http\Response
-     */
-    public function show(OrdenCompra $ordenCompra)
-    {
-        //
-    }
+        if (Arr::exists($data, 'anexo'))
+        {
+            $anexo = $data['anexo'];
+            $fileName = File::uploadFile($anexo);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\OrdenCompra  $ordenCompra
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OrdenCompra $ordenCompra)
-    {
-        //
+            $data['anexo'] = $fileName;
+        }
+
+        return $centroCosto->ordenCompra()->create($data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\OrdenCompra  $ordenCompra
+     * @param  \App\CentroCosto  $centroCosto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrdenCompra $ordenCompra)
+    public function update(CentroCosto $centroCosto)
     {
         //
     }
@@ -75,11 +46,27 @@ class OrdenCompraController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\OrdenCompra  $ordenCompra
+     * @param  \App\CentroCosto  $centroCosto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrdenCompra $ordenCompra)
+    public function destroy(CentroCosto $centroCosto)
     {
         //
+    }
+
+    /**
+     * @param array $request
+     * @return array
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    private static function validateData(array $payload) {
+
+        $rules = [
+            'numero_orden'  => 'required|integer',
+        ];
+
+        Helper::validator($payload, $rules);
+
+        return $payload;
     }
 }

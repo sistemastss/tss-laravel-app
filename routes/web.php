@@ -11,20 +11,17 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
-Route::get('/key', function () {
+/*Route::get('/key', function () {
     return str_random(60);
-});
+});*/
 
 
 Route::get('view-mail', 'MailController@seeMail');
 
-Route::get('pdf', function () {
+/*Route::get('pdf', function () {
     return view('pdf.informe');
-});
-
-route::get('informe', 'InformePdfController@index');
-
+});*/

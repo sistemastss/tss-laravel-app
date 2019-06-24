@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Usuarios;
 
-use App\Usuario;
-use App\Roles;
 use App\Http\Resources\Usuarios\FreelanceResource;
+use App\Models\Usuario\Roles;
+use App\Models\Usuario\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 

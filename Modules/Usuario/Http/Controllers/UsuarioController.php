@@ -1,13 +1,11 @@
 <?php
 
-namespace Modules\Usuario\Http\Controllers;
+namespace App\Http\Controllers;
 
-use App\Http\Resources\FuncionarioResource;
-use App\Http\Resources\UsuarioResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\Usuario\Entities\Usuario;
+use App\Models\Usuario\Usuario;
 
 class UsuarioController extends Controller
 {

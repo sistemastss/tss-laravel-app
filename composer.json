@@ -13,9 +13,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "nwidart/laravel-modules": "^5.0",
         "rap2hpoutre/fast-excel": "^1.2",
-        "tymon/jwt-auth": "^0.5.12"
+        "tymon/jwt-auth": "1.0.0-rc.3"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -37,8 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "Modules\\": "Modules/"
+            "App\\": "app/"
         },
         "classmap": [
             "database/seeds",
